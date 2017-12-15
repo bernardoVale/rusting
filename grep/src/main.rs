@@ -18,8 +18,10 @@ fn main() {
     let expression = &args[1];
     let file_name = &args[2];
 
-    let f = File::open(file_name).expect("Could not open file");
-    let file = BufReader::new(&f);
+    let file = {
+        let f = File::open(file_name).expect("Could not open file");
+        BufReader::new(f)
+    };
 
     for line in file.lines(){
         let l = line.unwrap();
